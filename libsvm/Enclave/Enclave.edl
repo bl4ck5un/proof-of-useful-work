@@ -1,0 +1,39 @@
+enclave {
+    include "sgx_report.h"
+    include "pouw_defs.h"
+    include "blockchain.h"
+    include "svm.h"
+    include "../Common/sha3.h"
+
+    trusted {
+        public void sgx_predict(
+            [user_check] struct svm_model* model,
+            [user_check] struct svm_node** x, size_t x_len,
+            [user_check] double* y,
+            [in] sgx_target_info_t *qe_info, [out] sgx_report_t *report);
+
+        public int zlib_compress(
+            [user_check] const char *s_pStr,
+            [in] sgx_target_info_t *qe_info, [out] sgx_report_t *report);
+
+        public void sha3_Init256([user_check] sha3_context *priv);
+        public void sha3_Init384([user_check] sha3_context *priv);
+        public void sha3_Init512([user_check] sha3_context *priv);
+        public void sha3_Update([user_check] sha3_context *priv, [user_check] const uint8_t *bufIn, size_t len);
+        public void sha3_Finalize([user_check] sha3_context *priv, [user_check] uint8_t* out);
+
+        public void protein_folding();
+
+        public int run (
+            [in] pow_spec* work,
+            [in] difficulty_t* difficulty,
+            [in] block_hash_t * prev,
+            [in] sgx_target_info_t* quote_enc_info,
+            [out] sgx_report_t* report,
+            [out] output_t* output);
+    };
+
+    untrusted {
+        int ocall_print_string([in, string] const char *str);
+    };
+};

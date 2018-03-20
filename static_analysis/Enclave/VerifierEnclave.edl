@@ -1,0 +1,20 @@
+enclave {
+    include "sgx_report.h"
+    include "sgx_error.h"
+    include "xml_parameter_t.h"
+
+    trusted {
+        public sgx_status_t ecall_analyze_user_enclave(
+            [in, size=filesize] unsigned char* buf,
+            int filesize,
+            [in] sgx_target_info_t* qe_info,
+            [in] xml_parameter_t config[14],
+            int config_size,
+            [out] sgx_report_t* report,
+            [out] uint8_t* result);
+    };
+
+    untrusted {
+        int ocall_print_string([in, string] const char *str);
+    };
+};

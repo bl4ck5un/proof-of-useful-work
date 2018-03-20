@@ -1,0 +1,14 @@
+Based on bitcoin 0.12.1 (MIT License, see COPYING)
+
+Add the following at the end of ~/.bashrc:
+source /opt/intel/sgxsdk/environment
+
+Make:
+./autogen
+./configure --disable-tests --disable-bench --with-incompatible-bdb
+make -j8
+
+Start operation:
+./startNodes.sh
+src/bitcoin-cli -datadir=node1 -conf=../node1.conf setgenerate true 1
+src/bitcoin-cli -datadir=node1 -conf=../node1.conf getblockcount

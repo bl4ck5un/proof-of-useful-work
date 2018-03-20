@@ -1,0 +1,21 @@
+enclave {
+    include "sgx_report.h"
+    include "pouw_defs.h"
+    include "blockchain.h"
+
+    trusted {
+        public int run (
+            [in] pow_spec* work,
+            [in] difficulty_t* difficulty,
+            [in] block_hash_t * prev,
+            [in] sgx_target_info_t* quote_enc_info,
+            [out] sgx_report_t* report,
+            [out] output_t* output);
+        public void protain_folding();
+    };
+
+    untrusted {
+        int ocall_print_string([in, string] const char *str);
+        unsigned long long rdtsc();
+    };
+};

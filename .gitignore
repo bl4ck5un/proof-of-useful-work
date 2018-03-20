@@ -1,0 +1,36 @@
+# C/C++
+*.o
+*.so
+*.out
+*~
+
+build
+bin
+Enclave_t.h
+Enclave_t.c
+Enclave_u.h
+Enclave_u.c
+VerifierEnclave_t.h
+VerifierEnclave_t.c
+VerifierEnclave_u.h
+VerifierEnclave_u.c
+
+*.S
+*.S.orig
+
+pouw
+verifier
+
+# Python
+*.pyc
+
+.directory
+.project
+.texlipse
+tmp/*
+.idea
+venv/
+env/
+
+.DS_Store
+.ipynb_checkpoints/
