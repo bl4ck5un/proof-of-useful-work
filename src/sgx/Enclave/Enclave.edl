@@ -1,0 +1,18 @@
+enclave {
+    include "sgx_report.h"
+    include "pouw_defs.h"
+
+    trusted {
+        public int pouw_main (
+            [in] pow_spec* work,
+            [in] current_hash* prev,
+            [in] sgx_target_info_t* quote_enc_info,
+            [out] sgx_report_t* pouw_att,
+            [out] sgx_report_t* job_att,
+            [out] job_result* output);
+    };
+
+    untrusted {
+        int ocall_print_string([in, string] const char *str);
+    };
+};
